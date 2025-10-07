@@ -346,7 +346,7 @@ export default function Home() {
                     {/* Curriculum Topic Selection */}
                     <div className='mb-6'>
                         <label className='block text-sm font-semibold text-gray-700 mb-3'>Select Learning Topic (Optional)</label>
-                        {availableTopics.length > 0 ? (
+                        {!isLoadingTopics && availableTopics.length > 0 ? (
                             <div className='space-y-3'>
                                 <select
                                     value={selectedTopicId}
