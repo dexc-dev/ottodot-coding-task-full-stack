@@ -2,6 +2,7 @@
 
 import { cleanStepText, containsMarkdownTable, parseMarkdownTable } from '@/lib/markdownRenderer';
 import { useEffect, useState } from 'react';
+import { GradientClassesButton } from '@/components/ui/ButtonVariants';
 
 interface MathProblem {
     problem_text: string;
@@ -387,6 +388,19 @@ export default function Home() {
                             </div>
                         )}
                     </button>
+
+                    {/* Weekly Online Classes Button */}
+                    <div className='mt-4'>
+                        <GradientClassesButton 
+                            fullWidth
+                            onClick={() => {
+                                // Add your weekly classes functionality here
+                                console.log('Weekly Online Classes clicked');
+                            }}
+                        >
+                            Weekly Online Classes
+                        </GradientClassesButton>
+                    </div>
                 </div>
 
                 {problem && (
