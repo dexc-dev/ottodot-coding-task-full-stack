@@ -107,13 +107,13 @@ Create a new API route that handles:
 
 ### 3. Requirements Checklist
 
-- [ ] AI generates appropriate Primary 5 level math problems
-- [ ] Problems and answers are saved to Supabase
-- [ ] User submissions are saved with feedback
-- [ ] AI generates helpful, personalized feedback
-- [ ] UI is clean and mobile-responsive
-- [ ] Error handling for API failures
-- [ ] Loading states during API calls
+- [x] AI generates appropriate Primary 5 level math problems
+- [x] Problems and answers are saved to Supabase
+- [x] User submissions are saved with feedback
+- [x] AI generates helpful, personalized feedback
+- [x] UI is clean and mobile-responsive
+- [x] Error handling for API failures
+- [x] Loading states during API calls
 
 ## Deployment
 
@@ -132,31 +132,39 @@ When submitting your assessment, provide:
 2. **Live Demo URL**: Your Vercel deployment
 3. **Supabase Credentials**: Add these to your README for testing:
     ```
-    SUPABASE_URL: [Your Supabase Project URL]
-    SUPABASE_ANON_KEY: [Your Supabase Anon Key]
+    SUPABASE_URL: https://gzmdnwlgneywtlxqbkgt.supabase.co
+    SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd6bWRud2xnbmV5d3RseHFia2d0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3NDYxMTMsImV4cCI6MjA3NTMyMjExM30.xyVK7k8ZXqfk9_M4wPsH89vKcoyZ-PClj9PuQYq8ILs
     ```
 
 ## Implementation Notes
-
-_Please fill in this section with any important notes about your implementation, design decisions, challenges faced, or features you're particularly proud of._
-
 ### My Implementation:
 
--
--
--
+**Core Features Completed:**
+- [x] Full-stack Next.js application with TypeScript
+- [x] Supabase integration for data persistence
+- [x] Google Gemini AI integration for problem generation and feedback
+- [x] Complete API routes for problem generation and answer submission
+- [x] Mobile-responsive UI with Tailwind CSS
 
-## Additional Features (Optional)
+**Challenges Overcome:**
+- Tailwind CSS configuration and NextJS version compatibility issues
+- AI prompt engineering for educational content
+- Component reusability and styling consistency
 
-If you have time, consider adding:
+**Other(s)**
+- Modified API request/response from the original to cater hints, steps, etc..
+- Used the 2021 Primary Mathematics Syllabus P1 to P6_Updated Dec 2023.pdf as contextual hint for multiple topics
+- PDF size is too large since it covers other Primary level topics, extracted only those for Primary 5 and stored in MD file (\curriculum\primary-5-math.md)
+- The use of react states can be further optimized, but prioritized requirements/checklists
 
-- [ ] Difficulty levels (Easy/Medium/Hard)
-- [ ] Problem history view
-- [ ] Score tracking
-- [ ] Different problem types (addition, subtraction, multiplication, division)
-- [ ] Hints system
-- [ ] Step-by-step solution explanations
+## Additional Features Implemented
 
----
+Beyond the core requirements, the following features have been implemented:
+- [x] Difficulty levels (Easy/Medium/Hard)
+- [x] Problem history view
+- [x] Score tracking
+- [x] Different problem types (addition, subtraction, multiplication, division)
+- [x] Hints system
+- [x] Step-by-step solution explanations
 
-Good luck with your assessment! 🎯
+
