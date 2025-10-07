@@ -32,6 +32,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             'focus:outline-none focus:ring-2 focus:ring-offset-2',
             'disabled:opacity-50 disabled:cursor-not-allowed',
             'transform hover:scale-105 active:scale-95',
+            'cursor-pointer',
             fullWidth ? 'w-full' : '',
         ];
 

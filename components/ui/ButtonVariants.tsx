@@ -11,10 +11,10 @@ export const GradientClassesButton = React.forwardRef<
             ref={ref} 
             variant="custom" 
             size="lg" 
-            className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-bold shadow-lg"
+            className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-bold shadow-lg transform-none hover:transform-none active:transform-none cursor-pointer"
             {...props}
         >
-            {children || "Weekly Online Classes"}
+            {children}
         </Button>
     );
 });
