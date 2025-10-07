@@ -267,44 +267,45 @@ export default function Home() {
     };
 
     return (
-        <div className=''>
+        <div className='w-full max-w-4xl mx-auto px-4 py-8'>
             {/* Header */}
-            <header>
-                <div>
-                    <div>
-                        <div>
-                            <button onClick={loadProblemHistory}>Problem History</button>
-                        </div>
-                    </div>
+            <header className='mb-8'>
+                <div className='flex justify-end'>
+                    <button 
+                        onClick={loadProblemHistory}
+                        className='px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors'
+                    >
+                        Problem History
+                    </button>
                 </div>
             </header>
 
-            <main>
+            <main className='space-y-8'>
                 {/* Hero Section */}
-                <div>
-                    <h1>Math Problem Generator</h1>
+                <div className='text-center'>
+                    <h1 className='text-4xl font-bold text-gray-800 mb-6'>Math Problem Generator</h1>
 
                     {/* Score Display */}
                     {totalAttempts > 0 && (
-                        <div>
-                            <h3>Your Progress</h3>
-                            <div>
-                                <div>
-                                    <div>{score}</div>
-                                    <div>Correct</div>
+                        <div className='bg-white rounded-lg shadow-md p-6 mb-8'>
+                            <h3 className='text-xl font-semibold text-gray-700 mb-4'>Your Progress</h3>
+                            <div className='grid grid-cols-3 gap-4'>
+                                <div className='text-center'>
+                                    <div className='text-2xl font-bold text-green-600'>{score}</div>
+                                    <div className='text-sm text-gray-600'>Correct</div>
                                 </div>
-                                <div>
-                                    <div>{totalAttempts}</div>
-                                    <div>Total</div>
+                                <div className='text-center'>
+                                    <div className='text-2xl font-bold text-blue-600'>{totalAttempts}</div>
+                                    <div className='text-sm text-gray-600'>Total</div>
                                 </div>
-                                <div>
-                                    <div>
+                                <div className='text-center'>
+                                    <div className='text-2xl font-bold text-purple-600'>
                                         {totalAttempts > 0
                                             ? Math.round((score / totalAttempts) * 100)
                                             : 0}
                                         %
                                     </div>
-                                    <div>Score</div>
+                                    <div className='text-sm text-gray-600'>Score</div>
                                 </div>
                             </div>
                         </div>
@@ -312,17 +313,18 @@ export default function Home() {
                 </div>
 
                 {/* Problem Generation Section */}
-                <div>
-                    <h2>Generate Your Math Problem</h2>
+                <div className='bg-white rounded-lg shadow-md p-6'>
+                    <h2 className='text-2xl font-bold text-gray-800 mb-6 text-center'>Generate Your Math Problem</h2>
 
                     {/* Curriculum Topic Selection */}
-                    <div>
-                        <label>Select Learning Topic (Optional)</label>
+                    <div className='mb-6'>
+                        <label className='block text-sm font-semibold text-gray-700 mb-3'>Select Learning Topic (Optional)</label>
                         {availableTopics.length > 0 ? (
-                            <div>
+                            <div className='space-y-3'>
                                 <select
                                     value={selectedTopicId}
                                     onChange={e => setSelectedTopicId(e.target.value)}
+                                    className='w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg'
                                 >
                                     <option value="">🎯 General Math Problem</option>
                                     {availableTopics.map(topic => (
@@ -338,12 +340,12 @@ export default function Home() {
                                 </select>
 
                                 {selectedTopicId && (
-                                    <div>
-                                        <div>
-                                            <div>✅</div>
+                                    <div className='bg-green-50 border border-green-200 rounded-lg p-4'>
+                                        <div className='flex items-center'>
+                                            <div className='text-green-600 mr-3'>✅</div>
                                             <div>
-                                                <p>Topic Selected!</p>
-                                                <p>
+                                                <p className='font-semibold text-green-800'>Topic Selected!</p>
+                                                <p className='text-sm text-green-700'>
                                                     Problems will be tailored to this specific
                                                     learning objective
                                                 </p>
@@ -353,23 +355,32 @@ export default function Home() {
                                 )}
                             </div>
                         ) : (
-                            <div>
-                                <p>Loading curriculum topics...</p>
-                                <button onClick={loadAvailableTopics}>Refresh Topics</button>
+                            <div className='text-center py-4'>
+                                <p className='text-gray-600 mb-4'>Loading curriculum topics...</p>
+                                <button 
+                                    onClick={loadAvailableTopics}
+                                    className='px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors'
+                                >
+                                    Refresh Topics
+                                </button>
                             </div>
                         )}
                     </div>
 
                     {/* Generate Button */}
-                    <button onClick={generateProblem} disabled={isLoading}>
+                    <button 
+                        onClick={generateProblem} 
+                        disabled={isLoading}
+                        className='w-full px-8 py-4 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-bold rounded-xl shadow-lg transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed'
+                    >
                         {isLoading ? (
-                            <div>
-                                <div>Loading...</div>
+                            <div className='flex items-center justify-center'>
+                                <div className='animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3'></div>
                                 Generating Problem...
                             </div>
                         ) : (
-                            <div>
-                                <span>🎯</span>
+                            <div className='flex items-center justify-center'>
+                                <span className='mr-2'>🎯</span>
                                 {selectedTopicId
                                     ? 'Generate Topic-Specific Problem'
                                     : 'Generate New Problem'}
@@ -379,50 +390,56 @@ export default function Home() {
                 </div>
 
                 {problem && (
-                    <div>
-                        <div>
-                            <h2>Math Problem</h2>
+                    <div className='bg-white rounded-lg shadow-md p-6'>
+                        <div className='text-center mb-6'>
+                            <h2 className='text-2xl font-bold text-gray-800'>Math Problem</h2>
                         </div>
 
-                        <div>
-                            <div>{renderProblemText(problem.problem_text)}</div>
+                        <div className='bg-gray-50 rounded-lg p-6 mb-6'>
+                            <div className='text-lg leading-relaxed'>{renderProblemText(problem.problem_text)}</div>
                         </div>
 
                         {/* Hint and Steps Buttons */}
-                        <div>
-                            <button onClick={() => setShowHint(!showHint)}>
+                        <div className='flex gap-3 mb-6'>
+                            <button 
+                                onClick={() => setShowHint(!showHint)}
+                                className='flex-1 px-4 py-2 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 font-medium rounded-lg transition-colors'
+                            >
                                 💡 {showHint ? 'Hide Hint' : 'Show Hint'}
                             </button>
-                            <button onClick={() => setShowSteps(!showSteps)}>
+                            <button 
+                                onClick={() => setShowSteps(!showSteps)}
+                                className='flex-1 px-4 py-2 bg-green-100 hover:bg-green-200 text-green-800 font-medium rounded-lg transition-colors'
+                            >
                                 📝 {showSteps ? 'Hide Steps' : 'Show Steps'}
                             </button>
                         </div>
 
                         {/* Hint Display */}
                         {showHint && (
-                            <div>
-                                <h3>💡 Hint:</h3>
-                                <p>{problem.hint}</p>
+                            <div className='bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6'>
+                                <h3 className='font-semibold text-yellow-800 mb-2'>💡 Hint:</h3>
+                                <p className='text-yellow-700'>{problem.hint}</p>
                             </div>
                         )}
 
                         {/* Step-by-step Display */}
                         {showSteps && (
-                            <div>
-                                <h3>📝 Step-by-Step Solution:</h3>
-                                <ol>
+                            <div className='bg-green-50 border border-green-200 rounded-lg p-4 mb-6'>
+                                <h3 className='font-semibold text-green-800 mb-4'>📝 Step-by-Step Solution:</h3>
+                                <ol className='space-y-2'>
                                     {problem.step_by_step.map((step, index) => (
-                                        <li key={index}>
-                                            <span>Step {index + 1}:</span> {cleanStepText(step)}
+                                        <li key={index} className='text-green-700'>
+                                            <span className='font-medium'>Step {index + 1}:</span> {cleanStepText(step)}
                                         </li>
                                     ))}
                                 </ol>
                             </div>
                         )}
 
-                        <form onSubmit={submitAnswer}>
+                        <form onSubmit={submitAnswer} className='space-y-4'>
                             <div>
-                                <label htmlFor="answer">Your Answer:</label>
+                                <label htmlFor="answer" className='block text-sm font-semibold text-gray-700 mb-2'>Your Answer:</label>
                                 <input
                                     type="number"
                                     id="answer"
@@ -430,18 +447,23 @@ export default function Home() {
                                     onChange={e => setUserAnswer(e.target.value)}
                                     placeholder="Enter your answer here"
                                     required
+                                    className='w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg'
                                 />
                             </div>
 
-                            <button type="submit" disabled={!userAnswer || isLoading}>
+                            <button 
+                                type="submit" 
+                                disabled={!userAnswer || isLoading}
+                                className='w-full px-8 py-4 bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-bold rounded-xl shadow-lg transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed'
+                            >
                                 {isLoading ? (
-                                    <div>
-                                        <div>Loading...</div>
+                                    <div className='flex items-center justify-center'>
+                                        <div className='animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3'></div>
                                         Checking Answer...
                                     </div>
                                 ) : (
-                                    <div>
-                                        <span>✅</span>
+                                    <div className='flex items-center justify-center'>
+                                        <span className='mr-2'>✅</span>
                                         Submit Answer
                                     </div>
                                 )}
@@ -451,26 +473,31 @@ export default function Home() {
                 )}
 
                 {error && (
-                    <div>
-                        <div>
-                            <div>⚠️</div>
-                            <h2>Error</h2>
+                    <div className='bg-red-50 border border-red-200 rounded-lg p-6'>
+                        <div className='flex items-center mb-4'>
+                            <div className='text-red-600 mr-3'>⚠️</div>
+                            <h2 className='text-xl font-semibold text-red-800'>Error</h2>
                         </div>
-                        <p>{error}</p>
-                        <button onClick={() => setError('')}>Dismiss</button>
+                        <p className='text-red-700 mb-4'>{error}</p>
+                        <button 
+                            onClick={() => setError('')}
+                            className='px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors'
+                        >
+                            Dismiss
+                        </button>
                     </div>
                 )}
 
                 {feedback && (
-                    <div>
-                        <div>
-                            <div>{isCorrect ? '🎉' : '💪'}</div>
-                            <h2>{isCorrect ? 'Excellent Work!' : 'Keep Trying!'}</h2>
-                            <p>{feedback}</p>
+                    <div className='bg-white rounded-lg shadow-md p-6'>
+                        <div className='text-center'>
+                            <div className='text-4xl mb-4'>{isCorrect ? '🎉' : '💪'}</div>
+                            <h2 className='text-2xl font-bold text-gray-800 mb-4'>{isCorrect ? 'Excellent Work!' : 'Keep Trying!'}</h2>
+                            <p className='text-gray-700 mb-6'>{feedback}</p>
 
                             {isCorrect && (
-                                <div>
-                                    <p>🏆 Great job! You're mastering this concept!</p>
+                                <div className='bg-green-50 border border-green-200 rounded-lg p-4 mb-6'>
+                                    <p className='text-green-800 font-semibold'>🏆 Great job! You're mastering this concept!</p>
                                 </div>
                             )}
 
@@ -482,6 +509,7 @@ export default function Home() {
                                     setShowHint(false);
                                     setShowSteps(false);
                                 }}
+                                className='px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
                             >
                                 Try Another Problem
                             </button>
@@ -491,45 +519,50 @@ export default function Home() {
 
                 {/* Problem History Modal */}
                 {showHistory && (
-                    <div>
-                        <div>
-                            <div>
-                                <h2>Problem History</h2>
-                                <button onClick={() => setShowHistory(false)}>×</button>
+                    <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50'>
+                        <div className='bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden'>
+                            <div className='flex items-center justify-between p-6 border-b border-gray-200'>
+                                <h2 className='text-2xl font-bold text-gray-800'>Problem History</h2>
+                                <button 
+                                    onClick={() => setShowHistory(false)}
+                                    className='text-gray-500 hover:text-gray-700 text-2xl font-bold'
+                                >
+                                    ×
+                                </button>
                             </div>
 
-                            {problemHistory.length > 0 ? (
-                                <div>
-                                    {problemHistory.map((session, index) => (
-                                        <div key={session.id}>
-                                            <div>
-                                                <h3>Problem #{index + 1}</h3>
-                                                <div>
-                                                    {new Date(
-                                                        session.created_at
-                                                    ).toLocaleDateString()}
+                            <div className='p-6 overflow-y-auto max-h-[calc(90vh-120px)]'>
+                                {problemHistory.length > 0 ? (
+                                    <div className='space-y-6'>
+                                        {problemHistory.map((session, index) => (
+                                            <div key={session.id} className='bg-gray-50 rounded-lg p-4'>
+                                                <div className='flex items-center justify-between mb-3'>
+                                                    <h3 className='text-lg font-semibold text-gray-800'>Problem #{index + 1}</h3>
+                                                    <div className='text-sm text-gray-600'>
+                                                        {new Date(session.created_at).toLocaleDateString()}
+                                                    </div>
+                                                </div>
+                                                <div className='mb-4 text-gray-700'>{renderProblemText(session.problem_text)}</div>
+                                                <div className='flex items-center justify-between text-sm'>
+                                                    <span className='bg-blue-100 text-blue-800 px-2 py-1 rounded'>Score: {session.score}%</span>
+                                                    <span className='bg-green-100 text-green-800 px-2 py-1 rounded'>
+                                                        {session.correct_attempts}/{session.total_attempts} Correct
+                                                    </span>
+                                                    {session.curriculum_topic_name && (
+                                                        <span className='bg-purple-100 text-purple-800 px-2 py-1 rounded'>{session.curriculum_topic_name}</span>
+                                                    )}
                                                 </div>
                                             </div>
-                                            <div>{renderProblemText(session.problem_text)}</div>
-                                            <div>
-                                                <span>Score: {session.score}%</span>
-                                                <span>
-                                                    {session.correct_attempts}/
-                                                    {session.total_attempts} Correct
-                                                </span>
-                                                {session.curriculum_topic_name && (
-                                                    <span>{session.curriculum_topic_name}</span>
-                                                )}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <div>
-                                    <p>No problems solved yet!</p>
-                                    <p>Start solving problems to see your history here.</p>
-                                </div>
-                            )}
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className='text-center py-12'>
+                                        <div className='text-6xl mb-4'>📚</div>
+                                        <p className='text-xl text-gray-600 mb-2'>No problems solved yet!</p>
+                                        <p className='text-gray-500'>Start solving problems to see your history here.</p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 )}
