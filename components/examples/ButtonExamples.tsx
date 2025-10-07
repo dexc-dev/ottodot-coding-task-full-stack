@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, WhatsAppTrialButton, GradientClassesButton } from '@/components/ui';
+import { Button, GradientClassesButton } from '@/components/ui';
 
 export const ButtonExamples = () => {
     return (
@@ -9,17 +9,8 @@ export const ButtonExamples = () => {
                     Button Component Examples
                 </h1>
 
-                {/* WhatsApp Trial Button */}
-                <section className="mb-12">
-                    <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-                        WhatsApp Trial Button
-                    </h2>
-                    <div className="flex flex-wrap gap-4">
-                        <WhatsAppTrialButton>Join Trial</WhatsAppTrialButton>
-                        <WhatsAppTrialButton size="sm">Small Trial</WhatsAppTrialButton>
-                        <WhatsAppTrialButton size="xl">Large Trial</WhatsAppTrialButton>
-                    </div>
-                </section>
+                {/* WhatsApp Trial Button - REMOVED */}
+                {/* This section has been removed as WhatsAppTrialButton no longer exists */}
 
                 {/* Gradient Classes Button */}
                 <section className="mb-12">
@@ -81,9 +72,10 @@ export const ButtonExamples = () => {
                         <Button fullWidth variant="secondary">
                             Full Width Secondary
                         </Button>
-                        <WhatsAppTrialButton fullWidth>
-                            Full Width WhatsApp Trial
-                        </WhatsAppTrialButton>
+                        <GradientClassesButton fullWidth>
+                            <span>Full Width</span>
+                            <span>Gradient Classes</span>
+                        </GradientClassesButton>
                     </div>
                 </section>
 
