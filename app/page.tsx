@@ -271,13 +271,22 @@ export default function Home() {
         <div className='w-full max-w-4xl mx-auto px-4 py-8'>
             {/* Header */}
             <header className='mb-8'>
-                <div className='flex justify-end'>
-                    <button 
-                        onClick={loadProblemHistory}
-                        className='px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors'
-                    >
-                        Problem History
-                    </button>
+                <div className='flex items-center justify-between'>
+                    <div className='flex items-center'>
+                        <img 
+                            src="https://static.wixstatic.com/media/97328e_85a4cc819a494add85883b78b207bbb1~mv2.png/v1/fill/w_136,h_17,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Ottodot%C2%AE.png"
+                            alt="Ottodot"
+                            className='w-[136px] h-[17px]'
+                        />
+                    </div>
+                    <div className='flex justify-end'>
+                        <GradientClassesButton 
+                            onClick={loadProblemHistory}
+                            className='bg-gradient-to-r from-[#BEF0FA] to-[#64DCF0] hover:from-[#A8E8F5] hover:to-[#4FD4E8] text-[#3264B4] font-bold shadow-lg px-8 py-4 text-lg rounded-xl'
+                        >
+                            Problem History
+                        </GradientClassesButton>
+                    </div>
                 </div>
             </header>
 
@@ -289,7 +298,7 @@ export default function Home() {
                     {/* Score Display */}
                     {totalAttempts > 0 && (
                         <div className='bg-white rounded-lg shadow-md p-6 mb-8'>
-                            <h3 className='text-xl font-semibold text-gray-700 mb-4'>Your Progress</h3>
+                            <h3 className='text-xl font-semibold text-gray-700 mb-4 text-center'>Your Progress</h3>
                             <div className='grid grid-cols-3 gap-4'>
                                 <div className='text-center'>
                                     <div className='text-2xl font-bold text-green-600'>{score}</div>
@@ -314,7 +323,7 @@ export default function Home() {
                 </div>
 
                 {/* Problem Generation Section */}
-                <div className='bg-white rounded-lg shadow-md p-6'>
+                <div className='bg-white shadow-md p-6 border-[3px] border-[#8ac959] rounded-[30px]'>
                     <h2 className='text-2xl font-bold text-gray-800 mb-6 text-center'>Generate Your Math Problem</h2>
 
                     {/* Curriculum Topic Selection */}
@@ -325,7 +334,7 @@ export default function Home() {
                                 <select
                                     value={selectedTopicId}
                                     onChange={e => setSelectedTopicId(e.target.value)}
-                                    className='w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg'
+                                    className='w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#8ac959] focus:border-[#8ac959] text-lg break-words whitespace-normal'
                                 >
                                     <option value="">General Math Problem</option>
                                     {availableTopics.map(topic => (
@@ -368,13 +377,14 @@ export default function Home() {
                         fullWidth
                         onClick={generateProblem}
                         disabled={isLoading}
+                        className='rounded-full bg-[#54c437] hover:bg-[#4ab02f] text-white font-bold text-[19px] font-helvetica'
                     >
                         {isLoading ? 'Generating Problem...' : (selectedTopicId ? 'Generate Topic-Specific Problem' : 'Generate New Problem')}
                     </GradientClassesButton>
                 </div>
 
                 {problem && (
-                    <div className='bg-white rounded-lg shadow-md p-6'>
+                    <div className='bg-white shadow-md p-6 border-[3px] border-[#8ac959] rounded-[30px]'>
                         <div className='text-center mb-6'>
                             <h2 className='text-2xl font-bold text-gray-800'>Math Problem</h2>
                         </div>
@@ -385,18 +395,18 @@ export default function Home() {
 
                         {/* Hint and Steps Buttons */}
                         <div className='flex gap-3 mb-6'>
-                            <button 
+                            <GradientClassesButton 
                                 onClick={() => setShowHint(!showHint)}
-                                className='flex-1 px-4 py-2 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 font-medium rounded-lg transition-colors'
+                                className='flex-1 bg-gradient-to-r from-[#ffe08a] to-[#facf38] hover:from-[#ffd75e] hover:to-[#e9bf2f] text-[#ca531b] font-bold shadow-lg px-8 py-4 text-lg rounded-xl'
                             >
                                 {showHint ? 'Hide Hint' : 'Show Hint'}
-                            </button>
-                            <button 
+                            </GradientClassesButton>
+                            <GradientClassesButton 
                                 onClick={() => setShowSteps(!showSteps)}
-                                className='flex-1 px-4 py-2 bg-green-100 hover:bg-green-200 text-green-800 font-medium rounded-lg transition-colors'
+                                className='flex-1 bg-gradient-to-r from-[#ff6f8f] to-[#e3446c] hover:from-[#ff5a81] hover:to-[#cc385b] text-[#840010] font-bold shadow-lg px-8 py-4 text-lg rounded-xl'
                             >
                                 {showSteps ? 'Hide Steps' : 'Show Steps'}
-                            </button>
+                            </GradientClassesButton>
                         </div>
 
                         {/* Hint Display */}
@@ -435,13 +445,13 @@ export default function Home() {
                                 />
                             </div>
 
-                            <button 
+                            <GradientClassesButton 
                                 type="submit" 
                                 disabled={!userAnswer || isLoading}
-                                className='w-full px-8 py-4 bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-bold rounded-xl shadow-lg transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed'
+                                className='w-full rounded-full bg-[#54c437] hover:bg-[#4ab02f] text-white font-bold text-[19px] font-helvetica'
                             >
                                 {isLoading ? 'Checking Answer...' : 'Submit Answer'}
-                            </button>
+                            </GradientClassesButton>
                         </form>
                     </div>
                 )}
@@ -462,7 +472,7 @@ export default function Home() {
                 )}
 
                 {feedback && (
-                    <div className='bg-white rounded-lg shadow-md p-6'>
+                    <div className='bg-white shadow-md p-6 border-[3px] border-[#8ac959] rounded-[30px]'>
                         <div className='text-center'>
                             <h2 className='text-2xl font-bold text-gray-800 mb-4'>{isCorrect ? 'Excellent Work!' : 'Keep Trying!'}</h2>
                             <p className='text-gray-700 mb-6'>{feedback}</p>
@@ -473,7 +483,7 @@ export default function Home() {
                                 </div>
                             )}
 
-                            <button
+                            <GradientClassesButton
                                 onClick={() => {
                                     setFeedback('');
                                     setIsCorrect(null);
@@ -481,10 +491,10 @@ export default function Home() {
                                     setShowHint(false);
                                     setShowSteps(false);
                                 }}
-                                className='px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
+                                className='w-full rounded-full bg-[#54c437] hover:bg-[#4ab02f] text-white font-bold text-[19px] font-helvetica'
                             >
                                 Try Another Problem
-                            </button>
+                            </GradientClassesButton>
                         </div>
                     </div>
                 )}
