@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 interface MathProblem {
     problem_text: string;
     final_answer: number;
+    answer_type: 'numeric' | 'table' | 'graph';
     hint: string;
     step_by_step: string[];
 }
@@ -39,6 +40,7 @@ export default function Home() {
     const [problemHistory, setProblemHistory] = useState<any[]>([]);
     const [showHistory, setShowHistory] = useState(false);
     const feedbackRef = useRef<HTMLDivElement | null>(null);
+    const generateProblemRef = useRef<HTMLDivElement | null>(null);
 
     // Load available curriculum topics on component mount
     useEffect(() => {
@@ -137,6 +139,7 @@ export default function Home() {
                 setProblem({
                     problem_text: data.problem.problem_text,
                     final_answer: data.problem.final_answer,
+                    answer_type: data.problem.answer_type || 'numeric',
                     hint: data.problem.hint,
                     step_by_step: data.problem.step_by_step,
                 });
@@ -337,7 +340,7 @@ export default function Home() {
                 </div>
 
                 {/* Problem Generation Section */}
-                <div className='bg-white shadow-md p-6 border-[3px] border-[#8ac959] rounded-[30px]'>
+                <div ref={generateProblemRef} className='bg-white shadow-md p-6 border-[3px] border-[#8ac959] rounded-[30px]'>
                     <h2 className='text-2xl font-bold text-gray-800 mb-6 text-center'>Generate Your Math Problem</h2>
 
                     {/* Curriculum Topic Selection */}
@@ -447,13 +450,19 @@ export default function Home() {
 
                         <form onSubmit={submitAnswer} className='space-y-4'>
                             <div>
-                                <label htmlFor="answer" className='block text-sm font-semibold text-gray-700 mb-2'>Your Answer:</label>
+                                <label htmlFor="answer" className='block text-sm font-semibold text-gray-700 mb-2'>
+                                    {problem.answer_type === 'table' ? 'Your Answer (from table):' : 
+                                     problem.answer_type === 'graph' ? 'Your Answer (from graph):' : 
+                                     'Your Answer:'}
+                                </label>
                                 <input
                                     type="number"
                                     id="answer"
                                     value={userAnswer}
                                     onChange={e => setUserAnswer(e.target.value)}
-                                    placeholder="Enter your answer here"
+                                    placeholder={problem.answer_type === 'table' ? 'Enter the numeric answer from the table' :
+                                                problem.answer_type === 'graph' ? 'Enter the numeric answer from the graph' :
+                                                'Enter your answer here'}
                                     required
                                     className='w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg'
                                 />
@@ -504,6 +513,10 @@ export default function Home() {
                                     setUserAnswer('');
                                     setShowHint(false);
                                     setShowSteps(false);
+                                    // Scroll back to generate problem section
+                                    if (generateProblemRef.current) {
+                                        generateProblemRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }
                                 }}
                                 className='w-full rounded-full bg-[#54c437] hover:bg-[#4ab02f] text-white font-bold text-[19px] font-helvetica'
                             >
