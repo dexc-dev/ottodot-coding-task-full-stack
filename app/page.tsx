@@ -32,7 +32,7 @@ export default function Home() {
     const [error, setError] = useState('');
     const [availableTopics, setAvailableTopics] = useState<CurriculumTopic[]>([]);
     const [selectedTopicId, setSelectedTopicId] = useState('');
-    const [isLoadingTopics, setIsLoadingTopics] = useState(false);
+    const [isLoadingTopics, setIsLoadingTopics] = useState(true);
     const [showHint, setShowHint] = useState(false);
     const [showSteps, setShowSteps] = useState(false);
     const [score, setScore] = useState(0);
