@@ -1,8 +1,8 @@
 'use client';
 
+import { GradientClassesButton } from '@/components/ui/ButtonVariants';
 import { cleanStepText, containsMarkdownTable, parseMarkdownTable } from '@/lib/markdownRenderer';
 import { useEffect, useState } from 'react';
-import { GradientClassesButton } from '@/components/ui/ButtonVariants';
 
 interface MathProblem {
     problem_text: string;
@@ -327,14 +327,9 @@ export default function Home() {
                                     onChange={e => setSelectedTopicId(e.target.value)}
                                     className='w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg'
                                 >
-                                    <option value="">🎯 General Math Problem</option>
+                                    <option value="">General Math Problem</option>
                                     {availableTopics.map(topic => (
                                         <option key={topic.id} value={topic.id}>
-                                            {topic.difficulty === 'Easy'
-                                                ? '🟢'
-                                                : topic.difficulty === 'Medium'
-                                                  ? '🟡'
-                                                  : '🔴'}{' '}
                                             {topic.category} - {topic.subcategory}: {topic.name}
                                         </option>
                                     ))}
@@ -369,38 +364,13 @@ export default function Home() {
                     </div>
 
                     {/* Generate Button */}
-                    <button 
-                        onClick={generateProblem} 
+                    <GradientClassesButton 
+                        fullWidth
+                        onClick={generateProblem}
                         disabled={isLoading}
-                        className='w-full px-8 py-4 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-bold rounded-xl shadow-lg transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed'
                     >
-                        {isLoading ? (
-                            <div className='flex items-center justify-center'>
-                                <div className='animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3'></div>
-                                Generating Problem...
-                            </div>
-                        ) : (
-                            <div className='flex items-center justify-center'>
-                                <span className='mr-2'>🎯</span>
-                                {selectedTopicId
-                                    ? 'Generate Topic-Specific Problem'
-                                    : 'Generate New Problem'}
-                            </div>
-                        )}
-                    </button>
-
-                    {/* Weekly Online Classes Button */}
-                    <div className='mt-4'>
-                        <GradientClassesButton 
-                            fullWidth
-                            onClick={() => {
-                                // Add your weekly classes functionality here
-                                console.log('Weekly Online Classes clicked');
-                            }}
-                        >
-                            Weekly Online Classes
-                        </GradientClassesButton>
-                    </div>
+                        {isLoading ? 'Generating Problem...' : (selectedTopicId ? 'Generate Topic-Specific Problem' : 'Generate New Problem')}
+                    </GradientClassesButton>
                 </div>
 
                 {problem && (
@@ -419,20 +389,20 @@ export default function Home() {
                                 onClick={() => setShowHint(!showHint)}
                                 className='flex-1 px-4 py-2 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 font-medium rounded-lg transition-colors'
                             >
-                                💡 {showHint ? 'Hide Hint' : 'Show Hint'}
+                                {showHint ? 'Hide Hint' : 'Show Hint'}
                             </button>
                             <button 
                                 onClick={() => setShowSteps(!showSteps)}
                                 className='flex-1 px-4 py-2 bg-green-100 hover:bg-green-200 text-green-800 font-medium rounded-lg transition-colors'
                             >
-                                📝 {showSteps ? 'Hide Steps' : 'Show Steps'}
+                                {showSteps ? 'Hide Steps' : 'Show Steps'}
                             </button>
                         </div>
 
                         {/* Hint Display */}
                         {showHint && (
                             <div className='bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6'>
-                                <h3 className='font-semibold text-yellow-800 mb-2'>💡 Hint:</h3>
+                                <h3 className='font-semibold text-yellow-800 mb-2'>Hint:</h3>
                                 <p className='text-yellow-700'>{problem.hint}</p>
                             </div>
                         )}
@@ -440,7 +410,7 @@ export default function Home() {
                         {/* Step-by-step Display */}
                         {showSteps && (
                             <div className='bg-green-50 border border-green-200 rounded-lg p-4 mb-6'>
-                                <h3 className='font-semibold text-green-800 mb-4'>📝 Step-by-Step Solution:</h3>
+                                <h3 className='font-semibold text-green-800 mb-4'>Step-by-Step Solution:</h3>
                                 <ol className='space-y-2'>
                                     {problem.step_by_step.map((step, index) => (
                                         <li key={index} className='text-green-700'>
@@ -470,17 +440,7 @@ export default function Home() {
                                 disabled={!userAnswer || isLoading}
                                 className='w-full px-8 py-4 bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-bold rounded-xl shadow-lg transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed'
                             >
-                                {isLoading ? (
-                                    <div className='flex items-center justify-center'>
-                                        <div className='animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3'></div>
-                                        Checking Answer...
-                                    </div>
-                                ) : (
-                                    <div className='flex items-center justify-center'>
-                                        <span className='mr-2'>✅</span>
-                                        Submit Answer
-                                    </div>
-                                )}
+                                {isLoading ? 'Checking Answer...' : 'Submit Answer'}
                             </button>
                         </form>
                     </div>
@@ -489,7 +449,6 @@ export default function Home() {
                 {error && (
                     <div className='bg-red-50 border border-red-200 rounded-lg p-6'>
                         <div className='flex items-center mb-4'>
-                            <div className='text-red-600 mr-3'>⚠️</div>
                             <h2 className='text-xl font-semibold text-red-800'>Error</h2>
                         </div>
                         <p className='text-red-700 mb-4'>{error}</p>
@@ -505,13 +464,12 @@ export default function Home() {
                 {feedback && (
                     <div className='bg-white rounded-lg shadow-md p-6'>
                         <div className='text-center'>
-                            <div className='text-4xl mb-4'>{isCorrect ? '🎉' : '💪'}</div>
                             <h2 className='text-2xl font-bold text-gray-800 mb-4'>{isCorrect ? 'Excellent Work!' : 'Keep Trying!'}</h2>
                             <p className='text-gray-700 mb-6'>{feedback}</p>
 
                             {isCorrect && (
                                 <div className='bg-green-50 border border-green-200 rounded-lg p-4 mb-6'>
-                                    <p className='text-green-800 font-semibold'>🏆 Great job! You're mastering this concept!</p>
+                                    <p className='text-green-800 font-semibold'>Great job! You're mastering this concept!</p>
                                 </div>
                             )}
 
@@ -571,7 +529,6 @@ export default function Home() {
                                     </div>
                                 ) : (
                                     <div className='text-center py-12'>
-                                        <div className='text-6xl mb-4'>📚</div>
                                         <p className='text-xl text-gray-600 mb-2'>No problems solved yet!</p>
                                         <p className='text-gray-500'>Start solving problems to see your history here.</p>
                                     </div>
