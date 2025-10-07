@@ -26,8 +26,8 @@ cd math-problem-generator
 1. Go to [https://supabase.com](https://supabase.com) and create a free account
 2. Create a new project
 3. Go to Settings → API to find your:
-   - Project URL (starts with `https://`)
-   - Anon/Public Key
+    - Project URL (starts with `https://`)
+    - Anon/Public Key
 
 ### 3. Set Up Database Tables
 
@@ -43,15 +43,15 @@ cd math-problem-generator
 ### 5. Configure Environment Variables
 
 1. Copy `.env.local.example` to `.env.local`:
-   ```bash
-   cp .env.local.example .env.local
-   ```
+    ```bash
+    cp .env.local.example .env.local
+    ```
 2. Edit `.env.local` and add your actual keys:
-   ```
-   NEXT_PUBLIC_SUPABASE_URL=your_actual_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_actual_supabase_anon_key
-   GOOGLE_API_KEY=your_actual_google_api_key
-   ```
+    ```
+    NEXT_PUBLIC_SUPABASE_URL=your_actual_supabase_url
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_actual_supabase_anon_key
+    GOOGLE_API_KEY=your_actual_google_api_key
+    ```
 
 ### 6. Install Dependencies
 
@@ -81,25 +81,27 @@ Complete the TODO sections in the main page component:
 Create a new API route that handles:
 
 #### POST /api/math-problem (Generate Problem)
+
 - Use Google's Gemini AI to generate a math word problem
 - The AI should return JSON with:
-  ```json
-  {
-    "problem_text": "A bakery sold 45 cupcakes...",
-    "final_answer": 15
-  }
-  ```
+    ```json
+    {
+        "problem_text": "A bakery sold 45 cupcakes...",
+        "final_answer": 15
+    }
+    ```
 - Save the problem to `math_problem_sessions` table
 - Return the problem and session ID to the frontend
 
 #### POST /api/math-problem/submit (Submit Answer)
+
 - Receive the session ID and user's answer
 - Check if the answer is correct
 - Use AI to generate personalized feedback based on:
-  - The original problem
-  - The correct answer
-  - The user's answer
-  - Whether they got it right or wrong
+    - The original problem
+    - The correct answer
+    - The user's answer
+    - Whether they got it right or wrong
 - Save the submission to `math_problem_submissions` table
 - Return the feedback and correctness to the frontend
 
@@ -129,20 +131,20 @@ When submitting your assessment, provide:
 1. **GitHub Repository URL**: Make sure it's public
 2. **Live Demo URL**: Your Vercel deployment
 3. **Supabase Credentials**: Add these to your README for testing:
-   ```
-   SUPABASE_URL: [Your Supabase Project URL]
-   SUPABASE_ANON_KEY: [Your Supabase Anon Key]
-   ```
+    ```
+    SUPABASE_URL: [Your Supabase Project URL]
+    SUPABASE_ANON_KEY: [Your Supabase Anon Key]
+    ```
 
 ## Implementation Notes
 
-*Please fill in this section with any important notes about your implementation, design decisions, challenges faced, or features you're particularly proud of.*
+_Please fill in this section with any important notes about your implementation, design decisions, challenges faced, or features you're particularly proud of._
 
 ### My Implementation:
 
-- 
-- 
-- 
+-
+-
+-
 
 ## Additional Features (Optional)
 
