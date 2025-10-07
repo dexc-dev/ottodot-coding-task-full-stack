@@ -156,6 +156,7 @@ When submitting your assessment, provide:
 - Used the 2021 Primary Mathematics Syllabus P1 to P6_Updated Dec 2023.pdf as contextual hint for multiple topics
 - PDF size is too large since it covers other Primary level topics, extracted only those for Primary 5 and stored in MD file (\curriculum\primary-5-math.md)
 - The use of react states can be further optimized, but prioritized requirements/checklists
+- Codebase can still be further cleaned up to remove repetitive codes/hardcoded strings/unnecessary divs (need DRY on some areas)
 
 ## Additional Features Implemented
 

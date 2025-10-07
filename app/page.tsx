@@ -2,7 +2,7 @@
 
 import { GradientClassesButton } from '@/components/ui/ButtonVariants';
 import { cleanStepText, containsMarkdownTable, parseMarkdownTable } from '@/lib/markdownRenderer';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface MathProblem {
     problem_text: string;
@@ -38,6 +38,7 @@ export default function Home() {
     const [totalAttempts, setTotalAttempts] = useState(0);
     const [problemHistory, setProblemHistory] = useState<any[]>([]);
     const [showHistory, setShowHistory] = useState(false);
+    const feedbackRef = useRef<HTMLDivElement | null>(null);
 
     // Load available curriculum topics on component mount
     useEffect(() => {
@@ -107,6 +108,9 @@ export default function Home() {
 
     const generateProblem = async () => {
         setIsLoading(true);
+        // Hide previous problem/answer and feedback immediately
+        setProblem(null);
+        setSessionId(null);
         setFeedback('');
         setIsCorrect(null);
         setUserAnswer('');
@@ -163,6 +167,9 @@ export default function Home() {
         }
 
         setIsLoading(true);
+        // Clear stale state before submitting to avoid showing old feedback
+        setFeedback('');
+        setIsCorrect(null);
         setError('');
 
         try {
@@ -266,6 +273,13 @@ export default function Home() {
             setError(errorMessage);
         }
     };
+
+    // Smooth scroll to feedback when it appears
+    useEffect(() => {
+        if (feedback && feedbackRef.current) {
+            feedbackRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [feedback]);
 
     return (
         <div className='w-full max-w-4xl mx-auto px-4 py-8'>
@@ -447,7 +461,7 @@ export default function Home() {
 
                             <GradientClassesButton 
                                 type="submit" 
-                                disabled={!userAnswer || isLoading}
+                                disabled={!userAnswer || isLoading || isCorrect === true}
                                 className='w-full rounded-full bg-[#54c437] hover:bg-[#4ab02f] text-white font-bold text-[19px] font-helvetica'
                             >
                                 {isLoading ? 'Checking Answer...' : 'Submit Answer'}
@@ -472,7 +486,7 @@ export default function Home() {
                 )}
 
                 {feedback && (
-                    <div className='bg-white shadow-md p-6 border-[3px] border-[#8ac959] rounded-[30px]'>
+                    <div ref={feedbackRef} className='bg-white shadow-md p-6 border-[3px] border-[#8ac959] rounded-[30px]'>
                         <div className='text-center'>
                             <h2 className='text-2xl font-bold text-gray-800 mb-4'>{isCorrect ? 'Excellent Work!' : 'Keep Trying!'}</h2>
                             <p className='text-gray-700 mb-6'>{feedback}</p>
